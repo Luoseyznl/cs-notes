@@ -1,0 +1,43 @@
+\documentclass[border=15pt]{standalone} % 注意这里：去掉了 tikz 选项
+\usepackage{ctex}      % 提供中文支持
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}  % 优雅的三线表
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+% 保持与文件系统表格完全一致的深灰蓝表头色
+\definecolor{headerbg}{RGB}{52, 73, 94} 
+\definecolor{headertext}{RGB}{255, 255, 255} 
+
+\begin{document}
+
+% 设置无衬线字体
+\sffamily
+% 行高设为 1.5，保持舒适的阅读留白
+\renewcommand{\arraystretch}{1.5}
+
+% 总宽度设为 16cm，第一列加粗占 2.5cm，第二列占 4cm，第三列自动铺满
+\begin{tabularx}{16cm}{>{\bfseries}p{4cm} X}
+	\rowcolor{headerbg}
+	\toprule
+	\textcolor{headertext}{\textbf{桌面环境}} & \textcolor{headertext}{\textbf{核心特点与适用场景}}                \\
+	\midrule
+
+	\multicolumn{2}{l}{\textbf{1. 主流桌面环境}}                                                            \\
+	\addlinespace[0.5ex]
+	GNOME                                 & 现代主流 Linux 发行版默认环境（如 Ubuntu/RHEL）。界面设计现代，交互逻辑偏重于稳定性与开箱即用。 \\
+	\addlinespace[1ex]
+	KDE Plasma                            & 提供高度可定制的图形界面，功能丰富，系统资源占用相对较高。界面交互逻辑对传统 Windows 用户迁移友好。    \\
+	\midrule
+
+	\multicolumn{2}{l}{\textbf{2. 轻量级桌面环境}}                                                           \\
+	\addlinespace[0.5ex]
+	XFCE                                  & 保留传统面板与完善系统功能的同时，系统硬件资源开销较小，响应迅速（如 Xubuntu 默认采用）。         \\
+	\addlinespace[1ex]
+	Fluxbox                               & 无面板设计，仅提供右键弹出式菜单控制。资源占用极低，适用于硬件受限或需极限压榨性能的场景。             \\
+	\addlinespace[1ex]
+	JWM                                   & 超轻量级窗口管理器，适用于内存与存储空间严格受限的微型发行版（如 Puppy Linux）。            \\
+	\bottomrule
+\end{tabularx}
+\end{document}

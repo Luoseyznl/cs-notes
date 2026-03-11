@@ -17,7 +17,7 @@
     % 基础节点样式
     baseBlock/.style={
         rectangle, thick, rounded corners=2pt,     
-        minimum width=2.8cm, minimum height=1.4cm, 
+        minimum width=2cm, minimum height=1cm, 
         align=center,                              
         drop shadow={opacity=0.08, shadow xshift=1pt, shadow yshift=-1pt} 
     },
@@ -40,7 +40,7 @@
             \fill[themeBlue!10] (-1.0, -0.6) rectangle (1.0, 0.6);   % 图形色块
             \draw (0, -0.8) -- (0, -1.3);
             \draw (-0.7, -1.3) -- (0.7, -1.3);
-            \node[font=\bfseries, text=themeBlue, xshift=16pt, yshift=-5pt] at (0, 0) {WORK};
+            \node[text=themeBlue, xshift=15pt, yshift=-6pt] at (0, 0) {WORK};
         \end{scope}
     },
     %
@@ -62,11 +62,18 @@
 	%% 布局
 	\node (man) at (0,0) {\tikz\pic{stickman};};    % node 声明 + (标签) + at (绝对中心位置) + {内容}
 	\node (pc) [above left=of man] {\tikz\pic{pcStamp};}; % node 声明 + (标签) + [相对位置] + {内容}
-	\node (live) [C, below right=of man] {\Large \textbf{LIVE}};
+	\node (wlb) [C, below right=of man] {\textbf{WLB}};
 
 	%% 连线 \draw[样式] (起点) -- 途中节点 (终点);
-	\draw[conn, <->, rounded corners=15pt] (pc) -| node [above] {Code} (man); % node [above] 在连线间塞入文本节点
-	\draw[conn, ->, rounded corners=30pt] (man) |- node [below] {Deploy} (live);
+	\draw[conn, <->] (pc.east) to [out=0, in=135]
+	node [above, sloped, inner sep=2pt, font=\scriptsize, text=black!70] {Code}
+	node [below, sloped, inner sep=2pt, font=\scriptsize, text=black!70] {Wage}
+	(man.north west);
+
+	% 从“人”通往“WLB”的曲线上，横亘着：Discipline
+	\draw[conn, ->] (man.south east) to [out=-45, in=180]
+	node [draw=black!50, fill=white, rectangle, rounded corners=2pt, thick, font=\scriptsize, text=black!80, inner sep=3pt] {Discipline}
+	(wlb.west);
 
 \end{tikzpicture}
 \end{document}
