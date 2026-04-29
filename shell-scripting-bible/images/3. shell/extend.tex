@@ -1,0 +1,34 @@
+\documentclass[multi=page, border=15pt, varwidth=16cm]{standalone}
+\usepackage{ctex}      
+\usepackage{tabularx}  
+\usepackage{booktabs}  
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\definecolor{headerbg}{RGB}{52, 73, 94}
+\definecolor{headertext}{RGB}{255, 255, 255}
+\newcommand{\thnode}[1]{\textcolor{headertext}{\bfseries #1}}
+
+\begin{document}
+\sffamily
+\renewcommand{\arraystretch}{1.3}
+
+\begin{page}
+	\centering
+	\setlength{\tabcolsep}{8pt} % 稍微收窄列间距，确保一行能放下所有工具名
+	\begin{tabular}{llll}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{文件系统}      & \thnode{在线扩容 (Online)}                     & \thnode{离线扩容} & \thnode{缩容 (Shrink)}        \\
+		\midrule
+		\textbf{ext2/3/4}  & \color{blue!70!black}支持 (resize2fs)        & 支持            & \color{orange!80!black}仅限离线 \\
+		\textbf{XFS}       & \color{blue!70!black}支持 (xfs\_growfs)      & 支持            & \color{red!70!black}不支持     \\
+		\textbf{ReiserFS}  & \color{blue!70!black}支持 (resize\_reiserfs) & 支持            & \color{blue!70!black}支持     \\
+		\textbf{Btrfs/ZFS} & \color{blue!70!black}支持 (原生指令)             & 支持            & \color{blue!70!black}支持     \\
+		\textbf{JFS}       & \color{blue!70!black}支持 (jfs\_extendfs)    & 支持            & \color{red!70!black}不支持     \\
+		\bottomrule
+		\multicolumn{4}{p{12.5cm}}{\scriptsize \color{gray}\textit{* 注：即便 LVM 逻辑卷可以随时拉伸，文件系统仍需运行对应工具才能识别新空间。}}
+	\end{tabular}
+\end{page}
+
+\end{document}

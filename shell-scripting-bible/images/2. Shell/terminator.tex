@@ -1,0 +1,35 @@
+\documentclass[border=15pt]{standalone}
+\usepackage{ctex}      
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}  
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\definecolor{headerbg}{RGB}{52, 73, 94} 
+\definecolor{headertext}{RGB}{255, 255, 255} 
+
+\begin{document}
+
+\sffamily
+\renewcommand{\arraystretch}{1.5}
+
+% 总宽度 16cm。名称占 3.5cm，生态环境占 4cm，特点自动铺满
+\begin{tabularx}{16cm}{>{\bfseries}p{3.5cm} p{1.5cm} X}
+	\rowcolor{headerbg}
+	\toprule
+	\textcolor{headertext}{\textbf{终端仿真器}} & \textcolor{headertext}{\textbf{桌面环境}} & \textcolor{headertext}{\textbf{核心特点与技术定位}}                           \\
+	\midrule
+
+	GNOME Terminal                         & GNOME                                 & 现代 Linux 系统中最常见的终端。交互逻辑简单，开箱即用，支持多标签页 (Tab) 与基础的配置文件管理。 \\
+	\addlinespace[1ex]
+
+	Konsole                                & KDE                                   & 提供更深度的界面定制选项、终端活动监视（如标签静默/活跃通知）及更高级的书签管理功能。       \\
+	\addlinespace[1ex]
+
+	xterm                                  & X11                                   & 最基础的图形化终端仿真器。不依赖任何庞大的现代桌面环境库（如 GTK 或 Qt），极度轻量但默认缺乏现代交互特性。        \\
+
+	\bottomrule
+\end{tabularx}
+
+\end{document}

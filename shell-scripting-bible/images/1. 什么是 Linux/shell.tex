@@ -1,4 +1,4 @@
-\documentclass[border=15pt]{standalone} % 注意这里：去掉了 tikz 选项
+\documentclass[border=15pt]{standalone}
 \usepackage{ctex}      % 提供中文支持
 \usepackage{array}
 \usepackage{tabularx}
@@ -6,18 +6,15 @@
 \usepackage{xcolor}
 \usepackage{colortbl}
 
-% 保持与文件系统表格完全一致的深灰蓝表头色
 \definecolor{headerbg}{RGB}{52, 73, 94} 
 \definecolor{headertext}{RGB}{255, 255, 255} 
 
 \begin{document}
 
-% 设置无衬线字体
 \sffamily
-% 行高设为 1.5，保持舒适的阅读留白
+
 \renewcommand{\arraystretch}{1.5}
 
-% 总宽度设为 16cm，第一列加粗占 2.5cm，第二列占 4cm，第三列自动铺满
 \begin{tabularx}{16cm}{>{\bfseries}p{2.5cm} p{4cm} X}
 	\rowcolor{headerbg}
 	\toprule

@@ -1,0 +1,44 @@
+\documentclass[border=15pt]{standalone}
+\usepackage{ctex}      % 提供中文支持
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}  % 优雅的三线表
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+% 统一的深灰蓝表头色
+\definecolor{headerbg}{RGB}{52, 73, 94} 
+\definecolor{headertext}{RGB}{255, 255, 255} 
+
+\begin{document}
+
+% 设置无衬线字体
+\sffamily
+% 行高设为 1.5，保持舒适的阅读留白
+\renewcommand{\arraystretch}{1.5}
+
+% 总宽度 16cm。选项占 3.5cm，参数占 5cm，描述自动铺满
+\begin{tabularx}{13cm}{>{\bfseries}p{3.5cm} X}
+	\rowcolor{headerbg}
+	\toprule
+	\textcolor{headertext}{\textbf{选项}} & \textcolor{headertext}{\textbf{参数}}                     \\
+	\midrule
+
+	-background                         & black, red, green, yellow, blue, magenta, cyan, white                       \\
+	\addlinespace[0.5ex]
+
+	-foreground                         & black, red, green, yellow, blue, magenta, cyan, white                      \\
+	\addlinespace[0.5ex]
+
+	-inversescreen                      & on 或 off                                                        \\
+	\addlinespace[0.5ex]
+
+	-reset                              & 无                                                                 \\
+	\addlinespace[0.5ex]
+
+	-store                              & 无                                                     \\
+
+	\bottomrule
+\end{tabularx}
+
+\end{document}

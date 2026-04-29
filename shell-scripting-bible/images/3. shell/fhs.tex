@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper, landscape, margin=1in]{geometry}
+\usepackage{ctex}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[
+			font=\sffamily,
+			dir/.style={font=\sffamily\bfseries, text=black, anchor=west},
+			symlink/.style={font=\sffamily\bfseries, text=orange!90!black, anchor=west},
+			modern/.style={font=\sffamily\bfseries, text=purple!90!black, anchor=west},
+			desc/.style={font=\sffamily\small, text=gray!80!black, anchor=west},
+			line/.style={draw, thick, gray!60}
+		]
+
+		% ================= 经典 FHS 目录树 =================
+		\node[dir, font=\sffamily\bfseries\large] at (0, 0) {/ (经典 FHS 目录树)};
+
+		% 主干线 (向下延伸到 opt)
+		\draw[line] (0.2, -0.3) -- (0.2, -12.0);
+
+		% 核心与配置组
+		\draw[line] (0.2, -0.8) -- (0.5, -0.8); \node[dir] at (0.5, -0.8) {boot};
+		\node[desc] at (2.5, -0.8) {系统启动核心文件};
+
+		\draw[line] (0.2, -1.6) -- (0.5, -1.6); \node[dir] at (0.5, -1.6) {etc};
+		\node[desc] at (2.5, -1.6) {全局配置文件};
+
+		\draw[line] (0.2, -2.4) -- (0.5, -2.4); \node[dir] at (0.5, -2.4) {home};
+		\node[desc] at (2.5, -2.4) {用户主目录};
+
+		\draw[line] (0.2, -3.2) -- (0.5, -3.2); \node[dir] at (0.5, -3.2) {root};
+		\node[desc] at (2.5, -3.2) {root 管理员主目录};
+
+		% 原有的 Usr-Merge 演进前
+		\draw[line] (0.2, -4.0) -- (0.5, -4.0); \node[dir] at (0.5, -4.0) {bin};
+		\node[desc] at (2.5, -4.0) {基础命令};
+
+		\draw[line] (0.2, -4.8) -- (0.5, -4.8); \node[dir] at (0.5, -4.8) {sbin};
+		\node[desc] at (2.5, -4.8) {管理命令};
+
+		\draw[line] (0.2, -5.6) -- (0.5, -5.6); \node[dir] at (0.5, -5.6) {lib};
+		\node[desc] at (2.5, -5.6) {基础命令所需的共享库};
+
+		\draw[line] (0.2, -6.4) -- (0.5, -6.4); \node[dir] at (0.5, -6.4) {usr};
+		\node[desc] at (2.5, -6.4) {次级层次结构};
+
+		\draw[line] (0.2, -7.2) -- (0.5, -7.2); \node[dir] at (0.5, -7.2) {var};
+		\node[desc] at (2.5, -7.2) {可变数据};
+
+		% var 的子目录 run
+		\draw[line] (0.8, -7.5) |- (1.1, -8.0); \node[dir] at (1.1, -8.0) {run};
+		\node[desc] at (2.5, -8.0) {运行时数据};
+
+		% 虚拟与挂载组
+		\draw[line] (0.2, -8.8) -- (0.5, -8.8); \node[dir] at (0.5, -8.8) {tmp};
+		\node[desc] at (2.5, -8.8) {临时文件 (定期清空)};
+
+		\draw[line] (0.2, -9.6) -- (0.5, -9.6); \node[dir] at (0.5, -9.6) {dev};
+		\node[desc] at (2.5, -9.6) {硬件设备节点文件};
+
+		\draw[line] (0.2, -10.4) -- (0.5, -10.4); \node[dir] at (0.5, -10.4) {proc};
+		\node[desc] at (2.5, -10.4) {进程与系统状态的内存展示};
+
+		\draw[line] (0.2, -11.2) -- (0.5, -11.2); \node[dir] at (0.5, -11.2) {mnt};
+		\node[desc] at (2.5, -11.2) {手动挂载外部设备的临时目录};
+
+		\draw[line] (0.2, -12.0) -- (0.5, -12.0); \node[dir] at (0.5, -12.0) {opt};
+		\node[desc] at (2.5, -12.0) {可选的独立第三方软件包};
+
+		% ================= 垂直分割线 =================
+		\draw[dashed, gray!40, thick] (8.0, 0.5) -- (8.0, -15.0);
+
+		% ================= 现代 Ubuntu 24.04 目录树 =================
+		\node[dir, font=\sffamily\bfseries\large] at (9, 0) {/ (现代 FHS 目录树)};
+
+		% 主干线 (向下延伸到 snap)
+		\draw[line] (9.2, -0.3) -- (9.2, -14.4);
+
+		% 核心与配置组
+		\draw[line] (9.2, -0.8) -- (9.5, -0.8); \node[dir] at (9.5, -0.8) {boot};
+		\node[desc] at (13.5, -0.8) {};
+
+		\draw[line] (9.2, -1.6) -- (9.5, -1.6); \node[dir] at (9.5, -1.6) {etc};
+		\node[desc] at (13.5, -1.6) {};
+
+		\draw[line] (9.2, -2.4) -- (9.5, -2.4); \node[dir] at (9.5, -2.4) {home};
+		\node[desc] at (13.5, -2.4) {};
+
+		\draw[line] (9.2, -3.2) -- (9.5, -3.2); \node[dir] at (9.5, -3.2) {root};
+		\node[desc] at (13.5, -3.2) {};
+
+		% Usr-Merge 演进组
+		\draw[line] (9.2, -4.0) -- (9.5, -4.0); \node[symlink] at (9.5, -4.0) {bin $\rightarrow$ usr/bin};
+		\node[desc] at (13.5, -4.0) {};
+
+		\draw[line] (9.2, -4.8) -- (9.5, -4.8); \node[symlink] at (9.5, -4.8) {sbin $\rightarrow$ usr/sbin};
+		\node[desc] at (13.5, -4.8) {\parbox{6cm}{这些底层目录现已转变为指向\\ \texttt{/usr} 下对应目录的\textbf{软链接}}};
+
+		\draw[line] (9.2, -5.6) -- (9.5, -5.6); \node[symlink] at (9.5, -5.6) {lib $\rightarrow$ usr/lib};
+		\node[desc] at (13.5, -5.6) {};
+
+		\draw[line] (9.2, -6.4) -- (9.5, -6.4); \node[dir] at (9.5, -6.4) {usr};
+		\node[desc] at (13.5, -6.4) {\textbf{系统软件}};
+
+		\draw[line] (9.2, -7.2) -- (9.5, -7.2); \node[dir] at (9.5, -7.2) {var};
+		\node[desc] at (13.5, -7.2) {可变数据};
+
+		% var 下面的 run 软链接体现演进
+		\draw[line, dashed, orange] (9.8, -7.5) |- (10.1, -7.7); \node[symlink, scale=0.85] at (10.1, -7.7) {run $\rightarrow$ ../run};
+
+		\draw[line] (9.2, -8.0) -- (9.5, -8.0); \node[modern] at (9.5, -8.0) {run};
+		\node[desc] at (13.5, -8.0) {运行时数据（挂载为 tmpfs，断电即焚）};
+
+		% 虚拟与挂载组
+		\draw[line] (9.2, -8.8) -- (9.5, -8.8); \node[dir] at (9.5, -8.8) {tmp};
+		\node[desc] at (13.5, -8.8) {（部分发行版也转为 tmpfs）};
+
+		\draw[line] (9.2, -9.6) -- (9.5, -9.6); \node[dir] at (9.5, -9.6) {dev};
+		\node[desc] at (13.5, -9.6) {现由 udev 动态管理（设备节点即插即用）};
+
+		\draw[line] (9.2, -10.4) -- (9.5, -10.4); \node[dir] at (9.5, -10.4) {proc};
+		\node[desc] at (13.5, -10.4) {};
+
+		\draw[line] (9.2, -11.2) -- (9.5, -11.2); \node[modern] at (9.5, -11.2) {sys};
+		\node[desc] at (13.5, -11.2) {Linux 内核与系统状态的内存展示（取代了 proc 的部分功能）};
+
+		\draw[line] (9.2, -12.0) -- (9.5, -12.0); \node[dir] at (9.5, -12.0) {mnt};
+		\node[desc] at (13.5, -12.0) {};
+
+		\draw[line] (9.2, -12.8) -- (9.5, -12.8); \node[modern] at (9.5, -12.8) {media};
+		\node[desc] at (13.5, -12.8) {挂载可移动媒体设备的目录（如 USB 驱动器、CD-ROM）};
+
+		\draw[line] (9.2, -13.6) -- (9.5, -13.6); \node[dir] at (9.5, -13.6) {opt};
+		\node[desc] at (13.5, -13.6) {};
+
+		% snap
+		\draw[line] (9.2, -14.4) -- (9.5, -14.4); \node[modern] at (9.5, -14.4) {snap};
+		\node[desc] at (13.5, -14.4) {\parbox{6cm}{Ubuntu 24.04 引入的目录，\\ 用于存放 Snap 包的挂载点和数据}};
+
+	\end{tikzpicture}
+	% \caption{经典 FHS 与 现代 Ubuntu 24.04 (Usr-Merge) 目录树演进对比}
+\end{figure}
+
+\end{document}

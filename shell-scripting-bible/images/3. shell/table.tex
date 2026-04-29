@@ -1,0 +1,171 @@
+\documentclass[multi=page, border=15pt, varwidth=16cm]{standalone}
+\usepackage{ctex}      % 提供中文支持
+\usepackage{tabularx}  % 自动调整列宽
+\usepackage{booktabs}  % 优雅的三线表支持
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+% 统一的深灰蓝表头色
+\definecolor{headerbg}{RGB}{52, 73, 94}
+\definecolor{headertext}{RGB}{255, 255, 255}
+
+% 自定义表头文本样式命令
+\newcommand{\thnode}[1]{\textcolor{headertext}{\bfseries #1}}
+
+\begin{document}
+\sffamily
+\renewcommand{\arraystretch}{1.5}
+
+% ================= 图片 1：进程身份矩阵 =================
+\begin{page}
+	\centering
+	\textbf{\Large Linux 进程身份矩阵} \\ \vspace{0.8em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}l X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{凭证类型}        & \thnode{机制与作用}                                                            \\
+		\midrule
+		Real UID (RUID)      & \textbf{实际用户 ID：} 标识进程的实际发起者通常继承自执行程序的登录用户，系统据此判定发送信号（如 \texttt{kill}）的权限 \\
+		Effective UID (EUID) & \textbf{有效用户 ID：} 标识进程当前的实际操作权限内核在进行访问控制鉴权（如文件读写、特权系统调用）时，仅校验此 ID         \\
+		Saved set-UID (SUID) & \textbf{保存的设置用户 ID：} 进程初始 EUID 的副本允许特权程序在执行完特定操作后，利用此记录主动降权至初始状态，实现权限最小化  \\
+		\bottomrule
+		\multicolumn{2}{p{\linewidth}}{\small \color{gray}\textit{* 注：身份矩阵同样包含组凭证（RGID、EGID、SGID），其生效与切换逻辑与 UID 完全一致}}
+	\end{tabularx}
+\end{page}
+
+% ================= 图片 2：基础权限说明 =================
+\begin{page}
+	\centering
+	\textbf{\Large Linux 文件与目录权限说明 } \\ \vspace{0.8em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}c >{\bfseries}c X X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{符号} & \thnode{八进制} & \thnode{作用于文件 (File)} & \thnode{作用于目录 (Directory)} \\
+		\midrule
+		r           & 4            & 允许读取文件数据              & 允许读取文件列表（需配合 x）            \\
+		w           & 2            & 允许修改文件数据              & 新建、删除或重命名文件（需配合 x）         \\
+		x           & 1            & 允许文件载入内存运行            & 允许进入目录解析其中的 inode 节点       \\
+		\bottomrule
+		\multicolumn{4}{p{\linewidth}}{\small \color{gray}\textit{* 注：删除或重命名文件的操作权限由其所在父目录的 wx 权限决定}}
+	\end{tabularx}
+\end{page}
+
+% ================= 图片 3：特殊权限位说明 =================
+\begin{page}
+	\centering
+	\textbf{\Large Linux 特殊权限位} \\ \vspace{0.8em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}l >{\bfseries}c X X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{特殊权限位}      & \thnode{八进制} & \thnode{作用于文件}               & \thnode{作用于目录}                         \\
+		\midrule
+		Set-User-ID (SUID)  & 4            & 进程的 EUID 可临时提升为该可执行文件属主的 UID & （无实际意义）                                \\
+		Set-Group-ID (SGID) & 2            & 进程的 EGID 可临时提升为该可执行文件属组的 GID & 此目录内新建的文件或子目录自动继承该目录的属组                \\
+		Sticky Bit (SBIT)   & 1            & （无实际意义）                      & 仅允许文件属主或 root 删除其中的文件（如 \texttt{/tmp}） \\
+		\bottomrule
+		\multicolumn{4}{p{\linewidth}}{\small \color{gray}\textit{* 在 \texttt{ls -l} 输出中，SUID/SGID 会覆盖原本的执行位，显示为 \texttt{s/S}；Sticky Bit 会覆盖 Other 的执行位，显示为 \texttt{t/T}}}
+	\end{tabularx}
+\end{page}
+
+% ================= 图片 4：Linux 核心信号 =================
+\begin{page}
+	\centering
+	\textbf{\Large Linux 核心进程信号 (Signal)} \\ \vspace{0.8em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}c l X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{信号} & \thnode{名称} & \thnode{作用与触发场景}                     \\
+		\midrule
+		0           & (无)         & 不发送真实信号，仅用于探测是否有权操作该进程及进程是否存活        \\
+		1           & HUP         & 挂起，常用于通知守护进程重新加载配置文件                 \\
+		2           & INT         & 中断，通常由 \texttt{Ctrl+C} 触发，请求进程优雅退出   \\
+		9           & KILL        & 强制杀死，无法被捕获、阻塞或忽略，内核立即终止进程            \\
+		15          & TERM        & 终止，\texttt{kill} 的默认信号，请求进程清理资源并优雅退出 \\
+		\bottomrule
+		\multicolumn{3}{p{\linewidth}}{\small \color{gray}\textit{* 强制拔除无响应进程常用 \texttt{kill -9 PID}；日常平滑终止常用 \texttt{kill -15 PID}}}
+	\end{tabularx}
+\end{page}
+
+% ================= 图片 5：ps 进程监测参数 =================
+\begin{page}
+	\centering
+	\textbf{\Large ps 进程监测核心参数} \\ \vspace{0.8em}
+
+	% Unix 风格
+	\textbf{Unix 风格（单破折号 \texttt{-}）} \\ \vspace{0.4em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}c X >{\bfseries}c X >{\bfseries}c X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{参数} & \thnode{作用} & \thnode{参数} & \thnode{作用} & \thnode{参数} & \thnode{作用}  \\
+		\midrule
+		-e / -A     & 显示系统所有进程    & -f          & 采用全格式显示     & -l          & 采用长格式显示      \\
+		-u          & 按进程属主过滤     & -p          & 按指定 PID 过滤  & -L          & 显示底层线程 (LWP) \\
+		\bottomrule
+	\end{tabularx}
+
+	\vspace{1.5em}
+
+	% BSD 风格
+	\textbf{BSD 风格（无破折号）} \\ \vspace{0.4em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}c X >{\bfseries}c X >{\bfseries}c X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{参数} & \thnode{作用} & \thnode{参数} & \thnode{作用} & \thnode{参数} & \thnode{作用}   \\
+		\midrule
+		a           & 所有关联终端的进程   & u           & 以用户为主的格式显示  & x           & 显示无控制终端的进程    \\
+		f           & 全格式（显示进程树）  & O           & 按指定字段进行排序   & Z           & SELinux 安全上下文 \\
+		\bottomrule
+		\multicolumn{6}{p{\linewidth}}{\small \color{gray}\textit{* 日常最高频组合：\texttt{ps aux}（查进程全景）与 \texttt{ps -ef}（查进程树级联关系）}}
+	\end{tabularx}
+\end{page}
+
+% ================= 图片 6：文本处理 (sort & grep) =================
+\begin{page}
+	\centering
+	\textbf{\Large 数据处理与过滤核心命令} \\ \vspace{0.8em}
+
+	\textbf{文本排序：\texttt{sort}} \\ \vspace{0.4em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}l X >{\bfseries}l X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{参数} & \thnode{作用}        & \thnode{参数} & \thnode{作用}     \\
+		\midrule
+		-n          & 按数值大小进行排序          & -r          & 逆序（反向）排序        \\
+		-h          & 按人类可读容量排序（如 1K/1M） & -k POS      & 仅按指定的列（字段）排序    \\
+		-u          & 剔除重复行（仅保留唯一行）      & -t CHAR     & 指定列分隔符（缺省默认为空格） \\
+		\bottomrule
+	\end{tabularx}
+
+	\vspace{1.5em}
+
+	\textbf{文本过滤：\texttt{grep}} \\ \vspace{0.4em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}l X >{\bfseries}l X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{参数} & \thnode{作用}    & \thnode{参数} & \thnode{作用}                  \\
+		\midrule
+		-n          & 在输出结果中显示行号     & -v          & 反向匹配（仅输出不含关键词的行）             \\
+		-i          & 匹配时忽略英文字母大小写   & -E          & 开启扩展正则表达式（替代 \texttt{egrep}） \\
+		-r          & 递归搜索指定目录下的所有文件 & -F          & 纯文本精确匹配（禁用正则解析）              \\
+		\bottomrule
+	\end{tabularx}
+\end{page}
+
+% ================= 图片 7：tar 归档与压缩 =================
+\begin{page}
+	\centering
+	\textbf{\Large tar 归档与压缩参数解构} \\ \vspace{0.8em}
+	\begin{tabularx}{\linewidth}{>{\bfseries}c X >{\bfseries}c X >{\bfseries}c X}
+		\toprule
+		\rowcolor{headerbg}
+		\thnode{核心动作} & \thnode{作用 (互斥选一)}    & \thnode{常驻辅助} & \thnode{作用}                    & \thnode{进阶辅助} & \thnode{作用 (按需)} \\
+		\midrule
+		-c            & \textbf{C}reate 创建新归档 & -z            & gzip 压缩或解压                     & -j            & bzip2 压缩或解压 \\
+		-x            & e\textbf{X}tract 提取   & -v            & 显示过程                           & -C            & 切换目标路径        \\
+		-t            & lis\textbf{T} 仅查看包内容  & -f            & 指定归档名\newline（\textbf{必须置于末尾}） & --delete      & 从归档中删除文件      \\
+		\bottomrule
+		\multicolumn{6}{p{\linewidth}}{\small \color{gray}\textit{* 终极实战组合：打包压缩 \texttt{tar -zcvf dist.tar.gz ./dir}；解压释放 \texttt{tar -zxvf src.tar.gz}}}
+	\end{tabularx}
+\end{page}
+
+\end{document}
