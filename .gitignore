@@ -1,3 +1,5 @@
+.vscode/*
+
 images/*
 !images/*/
 images/*/*
