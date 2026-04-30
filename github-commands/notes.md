@@ -44,7 +44,7 @@ ssh -T git@github.com
 工作流：工作区 (Workspace) ➔ 暂存区 (Staging Area/Index) ➔ 本地仓库 (Local Repo) ➔ 远端仓库 (Remote)。
 
 <div align="center">
-  <img src="../images/1-github/commands.png" alt="Github Workflow" width="90%">
+  <img src="../images/github-commands/commands.png" alt="Github Workflow" width="90%">
 </div>
 
 **撤销操作**：`git restore` 意思是撤销工作区的修改，`git restore --staged` 意思是撤销暂存但不丢弃修改。
@@ -56,7 +56,7 @@ ssh -T git@github.com
 分支模型：master, feat, orgin/master 
 
 <div align="center">
-  <img src="../images/1-github/branches.png" alt="Branching Model" width="100%">
+  <img src="../images/github-commands/branches.png" alt="Branching Model" width="100%">
 </div>
 
 图中 `git cherry-pick <Hash>` 可以跨分支复制单个指定的 Commit Hash，`git rebase` 可以在不改变节点的前提下改变分支起点。
@@ -68,7 +68,7 @@ ssh -T git@github.com
 Git 2.23 版本引入 `git switch` 和 `git restore` 旨在替代 `git checkout` 的Branching 和 Files 两个方面的职责。
 
 <div align="center">
-  <img src="../images/1-github/checkout.png" alt="Checkout vs Switch Restore" width="75%">
+  <img src="../images/github-commands/checkout.png" alt="Checkout vs Switch Restore" width="75%">
 </div>
 
 
