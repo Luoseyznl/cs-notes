@@ -11,3 +11,6 @@
 
 ### ⚙️ [2. 链接、装载与运行库 (Linkers & Loaders)](./linkers-and-loaders/notes.md)
 > 梳理 C/C++ 程序从编译、静态/动态链接、装载到退出的全生命周期，涵盖目标文件格式、虚拟内存空间、运行库（CRT）与系统调用的底层协作机制。
+
+### 🐍 [3. Python 学习笔记](./a-byte-of-python/notes.md)
+> 基于A Byte of Python 总结的速查手册（Cheatsheet）。涵盖 Pythonic 语法特点、推导式与生成器、面向对象编程、装饰器、文件 I/O 范式，以及实战经验与避坑指南。

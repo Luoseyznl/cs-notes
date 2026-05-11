@@ -1,0 +1,1 @@
+print("Hello, Ubuntu 24.04 and VS Code!")
