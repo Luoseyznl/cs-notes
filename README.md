@@ -6,7 +6,7 @@
 
 ## 🗂️ 目录 (Contents)
 
-### 🛠️ [1. Git & GitHub Workflow](./github-commands/)
+### 🛠️ [1. Git & GitHub Workflow](./github-commands/notes.md)
 > 整理 Git 版本控制的核心工作流、分支管理规范及 GitHub 协作实践机制。
 
 ### ⚙️ [2. 链接、装载与运行库 (Linkers & Loaders)](./linkers-and-loaders/notes.md)
