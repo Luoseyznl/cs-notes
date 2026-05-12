@@ -207,6 +207,8 @@ with open('data.txt', 'r', encoding='utf-8') as f:
         print(line.strip())  # strip() 去除行末的换行符
 ```
 
+## 2 异常处理
+
 除了常规的捕获机制，Python 的异常处理多了一个独有的 `else` 分支。完整的结构为：`try...except...else...finally`：
 
 - `try`：放置可能引发异常的代码；
