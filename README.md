@@ -17,3 +17,6 @@
 
 ### 🐳 [4. Docker 学习笔记](./docker-in-action/notes.md)
 > 介绍 Docker 的容器生命周期、网络模型（Bridge/NAT）与持久化卷挂载。梳理了基于 Dockerfile 的多阶段镜像打包最佳实践，并了解了 Compose 与 Swarm 的多容器集群编排（Orchestration）。
+
+### 🐧 [5. Linux 脚本编程](shell-scripting-bible/notes.md)
+
