@@ -2,9 +2,16 @@
 
 Docker 本身并不是虚拟化技术，而是利用 Linux 内核现有的特性（Namespaces, Cgroups, UnionFS 等）封装出来的一套“物流/隔离”系统（Containerization）。
 
-<div align="center">
-    <img src="../images/docker-in-action/dockerarch.png" alt="Docker Architecture" width="80%">
-</div>
+从架构上看，Docker 采用 C/S（客户端-服务端）架构：
+
+- Docker Daemon：运行在后台的 dockerd 守护进程，默认以宿主机的真 root 权限（UID 0）运行。（因此能调用内核特性）
+- Docker CLI：用户与 Docker 交互的命令行工具，通过 Socket 或 REST API 将命令发送给 Docker Daemon 进行处理。
+
+    <div align="center">
+        <img src="../images/docker-in-action/dockerarch.png" alt="Docker Architecture" width="80%">
+    </div>
+
+> 除了从 CLI 交互输入命令，还可以通过 Dockerfile (一种"基础设施即代码" (IaC) 的配置文件) 指导 Docker Daemon 构建镜像。
 
 ## 1 Containers 容器 vs. Virtual Machines 虚拟机
 
@@ -164,7 +171,14 @@ Dockerfile 的本质是将环境配置过程代码化 (Infrastructure as Code)�
     docker swarm init       # 初始化 Swarm 集群
     docker node ls          # 查看集群节点状态
     docker service create    # 创建服务
-    docker service ls        # 查看服务状态
+    docker service ls        # 查看服务状态情况下，绝对是宿主机上货真价实的 `root`（UID 0）！**
+
+正因为它是真 `root`，它才有权力去调用 Linux 内核底层的 Namespaces、Cgroups，去创建虚拟网卡、挂载文件系统。
+
+那么，既然 Docker 是 `root`，为什么笔记里说它“剥夺了容器的权限”呢？这就要引入 **Linux Capabilities（能力机制）** 这个概念了：
+
+#### 什么是 Capabilities？
+在早期的 Linux 中，权限是非黑即
     ```
 
 无论是 Compose 还是 Swarm，都采用声明式的配置方式。用户只需描述期望的服务状态（如运行多少个副本、使用哪个镜像、暴露哪些端口），编排工具会自动对齐当前状态与期望状态：
