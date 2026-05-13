@@ -3,7 +3,7 @@
 Docker 本身并不是虚拟化技术，而是利用 Linux 内核现有的特性（Namespaces, Cgroups, UnionFS 等）封装出来的一套“物流/隔离”系统（Containerization）。
 
 <div align="center">
-    <img src="../images/docker-in-action/docker-arch.png" alt="Docker Architecture" width="80%">
+    <img src="../images/docker-in-action/dockerarch.png" alt="Docker Architecture" width="80%">
 </div>
 
 ## 1 Containers 容器 vs. Virtual Machines 虚拟机
