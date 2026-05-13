@@ -14,3 +14,6 @@
 
 ### 🐍 [3. Python 学习笔记](./a-byte-of-python/notes.md)
 > 基于A Byte of Python 总结的速查手册（Cheatsheet）。涵盖 Pythonic 语法特点、推导式与生成器、面向对象编程、装饰器、文件 I/O 范式，以及实战经验与避坑指南。
+
+### 🐳 [4. Docker 学习笔记](./docker-in-action/notes.md)
+> 介绍 Docker 的容器生命周期、网络模型（Bridge/NAT）与持久化卷挂载。梳理了基于 Dockerfile 的多阶段镜像打包最佳实践，并了解了 Compose 与 Swarm 的多容器集群编排（Orchestration）。

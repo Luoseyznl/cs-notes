@@ -2,6 +2,10 @@
 
 Docker 本身并不是虚拟化技术，而是利用 Linux 内核现有的特性（Namespaces, Cgroups, UnionFS 等）封装出来的一套“物流/隔离”系统（Containerization）。
 
+<div align="center">
+    <img src="../images/docker-in-action/docker-arch.png" alt="Docker Architecture" width="80%">
+</div>
+
 ## 1 Containers 容器 vs. Virtual Machines 虚拟机
 
 > *Containers provide isolated process contexts, not whole system virtualization.*
@@ -41,7 +45,9 @@ Docker 将底层的宿主网络与容器剥离开来，赋予应用极高的运�
 
 在最常用的 Bridge 模式下，Docker 解决内外网通信的核心是**NAT（网络地址转换）**与**端口发布（Port Publishing）**：
 
-![Bridge 网络模型](../images/docker-in-action/network.png)
+<div align="center">
+    <img src="../images/docker-in-action/network.png" alt="Network" width="80%">
+</div>
 
 > 1. 同主机容器间通信：依靠内部虚拟 MAC 地址，通过虚拟网桥 docker0 直达。（无需宿主机网卡介入）
 > 2. 容器访问外部网络：通过 docker0 网桥转发到宿主机网卡 (NAT 为宿主机内网 IP)，再由宿主机网卡转发到路由器 (NAT 为路由器分配的公网 IP)。
@@ -66,16 +72,17 @@ Docker 利用 Linux 的 Capability 机制和 User Namespace（用户命名空间
 
 # Cheatsheet 指令速查
 
-<table style="border:none; text-align:center;">
-  <tr>
-    <td style="border:none; padding:10px;"><img src="../images/docker-in-action/cheatsheet-0.png" width="100%" alt="生命周期"></td>
-    <td style="border:none; padding:10px;"><img src="../images/docker-in-action/cheatsheet-1.png" width="100%" alt="状态排错"></td>
-  </tr>
-  <tr>
-    <td style="border:none; padding:10px;"><img src="../images/docker-in-action/cheatsheet-2.png" width="100%" alt="镜像分发"></td>
-    <td style="border:none; padding:10px;"><img src="../images/docker-in-action/cheatsheet-3.png" width="100%" alt="卷与网络"></td>
-  </tr>
-</table>
+# Cheatsheet 指令速查
+
+<div align="center">
+    <img src="../images/docker-in-action/cheatsheet-0.png" alt="容器生命周期管理" width="80%" style="margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-radius: 8px;">
+    <br>
+    <img src="../images/docker-in-action/cheatsheet-1.png" alt="状态检查与排错" width="80%" style="margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-radius: 8px;">
+    <br>
+    <img src="../images/docker-in-action/cheatsheet-2.png" alt="镜像构建与分发" width="80%" style="margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-radius: 8px;">
+    <br>
+    <img src="../images/docker-in-action/cheatsheet-3.png" alt="卷与网络管理" width="80%" style="margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-radius: 8px;">
+</div>
 
 ---
 
