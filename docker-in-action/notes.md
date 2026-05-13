@@ -72,8 +72,6 @@ Docker 利用 Linux 的 Capability 机制和 User Namespace（用户命名空间
 
 # Cheatsheet 指令速查
 
-# Cheatsheet 指令速查
-
 <div align="center">
     <img src="../images/docker-in-action/cheatsheet-0.png" alt="容器生命周期管理" width="80%" style="margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-radius: 8px;">
     <br>
