@@ -170,15 +170,8 @@ Dockerfile 的本质是将环境配置过程代码化 (Infrastructure as Code)�
     ```sh
     docker swarm init       # 初始化 Swarm 集群
     docker node ls          # 查看集群节点状态
-    docker service create    # 创建服务
-    docker service ls        # 查看服务状态情况下，绝对是宿主机上货真价实的 `root`（UID 0）！**
-
-正因为它是真 `root`，它才有权力去调用 Linux 内核底层的 Namespaces、Cgroups，去创建虚拟网卡、挂载文件系统。
-
-那么，既然 Docker 是 `root`，为什么笔记里说它“剥夺了容器的权限”呢？这就要引入 **Linux Capabilities（能力机制）** 这个概念了：
-
-#### 什么是 Capabilities？
-在早期的 Linux 中，权限是非黑即
+    docker service create   # 创建服务
+    docker service ls       # 查看服务状态
     ```
 
 无论是 Compose 还是 Swarm，都采用声明式的配置方式。用户只需描述期望的服务状态（如运行多少个副本、使用哪个镜像、暴露哪些端口），编排工具会自动对齐当前状态与期望状态：
