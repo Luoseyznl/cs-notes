@@ -19,4 +19,5 @@
 > 介绍 Docker 的容器生命周期、网络模型（Bridge/NAT）与持久化卷挂载。梳理了基于 Dockerfile 的多阶段镜像打包最佳实践，并了解了 Compose 与 Swarm 的多容器集群编排（Orchestration）。
 
 ### 🐧 [5. Linux 脚本编程](shell-scripting-bible/notes.md)
+> Linux 操作系统基础知识以及脚本编程基础。包括文件系统、虚拟目录树、Inode 与 LVM 存储、U-G-O 权限模型及包管理引擎等。
 
