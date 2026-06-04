@@ -1,0 +1,1 @@
+/usr/bin/g++ CMakeFiles/test_stack.dir/tests/test_thread_safe_stack.cpp.o -o test_stack  lib/libgtest.a lib/libgtest_main.a lib/libgtest.a 

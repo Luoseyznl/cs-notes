@@ -1,0 +1,5 @@
+add_test([=[ThreadSafeStackTest.SingleThreadBasic]=]  /home/gew/work/cs-notes/scripts/cpp-concurrency-action/build/test_stack [==[--gtest_filter=ThreadSafeStackTest.SingleThreadBasic]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[ThreadSafeStackTest.SingleThreadBasic]=]  PROPERTIES WORKING_DIRECTORY /home/gew/work/cs-notes/scripts/cpp-concurrency-action/build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test([=[ThreadSafeStackTest.ConcurrentPushPop]=]  /home/gew/work/cs-notes/scripts/cpp-concurrency-action/build/test_stack [==[--gtest_filter=ThreadSafeStackTest.ConcurrentPushPop]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[ThreadSafeStackTest.ConcurrentPushPop]=]  PROPERTIES WORKING_DIRECTORY /home/gew/work/cs-notes/scripts/cpp-concurrency-action/build SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set(  test_stack_TESTS ThreadSafeStackTest.SingleThreadBasic ThreadSafeStackTest.ConcurrentPushPop)

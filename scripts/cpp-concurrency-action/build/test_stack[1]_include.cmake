@@ -1,0 +1,5 @@
+if(EXISTS "/home/gew/work/cs-notes/scripts/cpp-concurrency-action/build/test_stack[1]_tests.cmake")
+  include("/home/gew/work/cs-notes/scripts/cpp-concurrency-action/build/test_stack[1]_tests.cmake")
+else()
+  add_test(test_stack_NOT_BUILT test_stack_NOT_BUILT)
+endif()

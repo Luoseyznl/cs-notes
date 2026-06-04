@@ -21,3 +21,5 @@
 ### 🐧 [5. Linux 脚本编程](shell-scripting-bible/notes.md)
 > Linux 操作系统基础知识以及脚本编程基础。包括文件系统、虚拟目录树、Inode 与 LVM 存储、U-G-O 权限模型及包管理引擎等。
 
+### 🧵 [6. C++ 并发编程](./cpp-concurrency-action/notes.md)
+> C++ 线程管理、互斥锁与条件变量、底层内存模型与原子操作（Atomic），以及手写基于细粒度锁和无锁（Lock-Free）的高并发数据结构（栈、队列）的工程实践。
